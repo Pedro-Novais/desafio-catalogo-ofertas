@@ -1,0 +1,64 @@
+import sqlite3
+import os
+from typing import Optional
+
+from sqlite3 import Connection
+
+from django.http import JsonResponse
+from django.views import View
+
+class ProductApi(View):
+    def get(self, request) -> JsonResponse:
+        try:
+            dir_script = os.path.dirname(os.path.abspath(__file__))
+            dir_database = os.path.join(dir_script, '..', '..', 'database', 'data.db')
+
+            conn = sqlite3.connect(dir_database)
+            print(conn)
+            products = self.get_products(conn)
+            
+            return JsonResponse(products, safe=False)
+
+        except Exception as e:
+            return JsonResponse({}, safe=False)
+    
+    def get_products(self, conn: Connection) -> list[Optional[dict]]:
+        try:
+            list_products = []
+            cursor = conn.cursor()
+
+            msg_get_products = """
+            SELECT * FROM products
+            """
+
+            cursor.execute(msg_get_products)
+            products = cursor.fetchall()
+
+            if not products:
+                return []
+            
+            column_names = [desc[0] for desc in cursor.description]  
+
+            for product in products:
+                data = dict(zip(column_names, product))  
+
+                list_products.append({
+                    "image": data.get("image"), 
+                    "name": data.get("name"),
+                    "price_full": data.get("price_full"),
+                    "installments": data.get("installments"), 
+                    "link": data.get("link"),
+                    "price_with_discount": data.get("price_final"),
+                    "porcentage_discount": data.get("porcentage_disocunt"), 
+                    "type_ship_full": data.get("type_ship"),
+                    "ship_free": data.get("ship_free")
+                })
+
+            cursor.fetchall()
+            cursor.close()
+
+            return list_products
+        
+        except Exception as e:
+            print("Erro ao resgatar dados do banco")
+            print(e)
