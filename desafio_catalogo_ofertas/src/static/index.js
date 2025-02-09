@@ -9,7 +9,7 @@ class InsertItens {
         const response = await fetch(this.URL);
         const data = await response.json();
 
-        if (!data || data == {}) {
+        if (!data || data.length == 0) {
             return this.no_items_find()
         }
 
@@ -268,7 +268,22 @@ class InsertItens {
     }
 
     no_items_find() {
-        return null
+        const main = document.querySelector('main')
+
+        const container_attributes = [
+            {
+                type: 'class',
+                value: 'anyItens'
+            }
+        ]
+        const container = this.create_element('div', container_attributes)
+
+        const msg = "Nenhum item foi encontrado :("
+        const h1 = this.create_element_default('p', msg)
+
+        container.appendChild(h1)
+
+        main.appendChild(container)
     }
 }
 

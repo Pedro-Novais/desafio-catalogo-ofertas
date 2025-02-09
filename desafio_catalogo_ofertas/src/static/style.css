@@ -164,11 +164,17 @@ main{
 
 .containerButtonProduct a:hover{
     cursor: pointer;
-    width: 80%;
+    width: 90%;
 }
 
 .line{
     margin-bottom: .8em;
+}
+
+.anyItens{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 1000px){
