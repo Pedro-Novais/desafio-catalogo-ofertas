@@ -6,13 +6,20 @@ import time
 from sqlite3 import Connection
 
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote.webdriver import WebElement
 
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+from selenium.webdriver.edge.options import Options
+
 
 def main() -> None:
     try:
@@ -26,8 +33,7 @@ def main() -> None:
         )
 
     except Exception as e:
-        print('Erro ao rodar o script de scrapping')
-        print(e)
+        print('Erro ao realizar o web scrapping, erro: {}'.format(e))
         sys.exit()
 
 def create_database() -> Connection:
@@ -66,11 +72,7 @@ def scrapping() -> list[dict]:
 
     URL = "https://lista.mercadolivre.com.br/computador-gamer-i7-16gb-ssd-1tb"
 
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
+    driver = get_driver()
     driver.get(URL)
 
     scroll_pause_time = 1
@@ -94,6 +96,35 @@ def scrapping() -> list[dict]:
     items = get_datas(products=products)
 
     return items
+
+def get_driver():
+
+    try:
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        return driver
+    except WebDriverException:
+        pass
+
+    try:
+        options = Options()
+        options.add_argument("--headless")  
+        options.add_argument("--disable-gpu")  
+        options.add_argument("--no-sandbox") 
+        driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+        return driver
+    except WebDriverException:
+        pass
+
+    try:
+        driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
+        return driver
+    except WebDriverException:
+        pass
+
+    print("Falha ao inicializar o WebDriver.")
+    return None
 
 def get_datas(
         products: list[WebElement]
