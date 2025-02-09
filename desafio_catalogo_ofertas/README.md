@@ -44,9 +44,9 @@ git clone https://github.com/Pedro-Novais/desafio-catalogo-ofertas.git
 ### Passo 2: Rodar o projeto
 
 1. Na raiz do projeto, será possível visualizar um executável, **run.bat**, 
-Esse que realiza todos os passos necessárias para a execução do projeto
-Desde a criação do ambiente virtual, intalação de dependências e a raspagem de dados
-É necessário apenas rodas o comando em modo de administrador e aguardar que o servidor esteja em execução
+esse script realiza todos os passos necessários para a execução do projeto,
+desde a criação do ambiente virtual, intalação de dependências e até a raspagem de dados
+sendo necessário apenas inciar o comando em modo de administrador, e aguardar até que o servidor esteja em execução
 
 
 ### Passo 3: Testando a Aplicação
