@@ -149,6 +149,9 @@ def get_datas(
             price_full = prices[0].text
             if len(prices) > 2:
                 price_with_dicount = prices[1].text
+                
+                if len(prices) > 3: 
+                    price_with_dicount = None
             else:
                 price_with_dicount = None
 
