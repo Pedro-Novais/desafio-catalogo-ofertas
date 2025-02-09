@@ -60,7 +60,9 @@ sendo necessário apenas inciar o comando em modo de administrador, e aguardar a
    
 2. **API**: A API expõe os dados do scraping em formato JSON, permitindo que o frontend consuma e exiba esses dados de forma dinâmica.
 
-3. **Frontend**: O frontend faz a requisição para a API e exibe os produtos como cards. É possível filtrar os itens com base em critérios como preço e categoria.
+3. **Frontend**: O frontend faz a requisição para a API e exibe os produtos como cards. É possível filtrar os itens com base em tipos de entrega, entrega grátis, etc...
+
+4. **Adicional**: Para fins de conhecimento do script, sempre que o sistema é executado, uma nova raspagem de dados é realizada, caso queira atualizar os produtos exibidos, basta reiniciar o servidor :)
 
 ## Estrutura de Pastas
 
