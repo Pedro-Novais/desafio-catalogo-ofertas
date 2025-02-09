@@ -32,14 +32,25 @@ class InsertItens {
         card.setAttribute('class', 'productCard')
 
         this.builder_product_image(card, item.image)
-        this.builder_product_title(card, item.name)
-        this.builder_product_price_full(card, item.price_full, item.price_with_discount)
-        this.builder_product_price_final(card, item.price_full, item.price_with_discount, item.porcentage_discount)
-        this.builder_product_instalments(card, item.instalments)
-        this.builder_product_type_ship(card, item.type_ship_full)
-        this.builder_product_ship_free(card, item.ship_free)
-        this.builder_product_button(card, item.link)
 
+        const attribute_container_info = [
+            {
+                type: 'class',
+                value: 'containerInfo'
+            }
+        ]
+
+        const card_info = this.create_element('div', attribute_container_info)
+
+        this.builder_product_title(card_info, item.name)
+        this.builder_product_price_full(card_info, item.price_full, item.price_with_discount)
+        this.builder_product_price_final(card_info, item.price_full, item.price_with_discount, item.porcentage_discount)
+        this.builder_product_instalments(card_info, item.instalments)
+        this.builder_product_type_ship(card_info, item.type_ship_full)
+        this.builder_product_ship_free(card_info, item.ship_free)
+        this.builder_product_button(card_info, item.link)
+        
+        card.appendChild(card_info)
         container.appendChild(card)
     }
 
