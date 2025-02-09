@@ -7,6 +7,8 @@ from sqlite3 import Connection
 from django.http import JsonResponse
 from django.views import View
 
+from .utils import formate_value
+
 class ProductApi(View):
     def get(self, request) -> JsonResponse:
         try:
@@ -40,14 +42,17 @@ class ProductApi(View):
 
             for product in products:
                 data = dict(zip(column_names, product))  
+            
+                price_full_formated = formate_value(value=data.get("price_full"))
+                price_with_discount_formated = formate_value(value=data.get("price_final"))
 
                 list_products.append({
                     "image": data.get("image"), 
                     "name": data.get("name"),
-                    "price_full": data.get("price_full"),
+                    "price_full": price_full_formated,
                     "instalments": data.get("installments"), 
                     "link": data.get("link"),
-                    "price_with_discount": data.get("price_final"),
+                    "price_with_discount": price_with_discount_formated,
                     "porcentage_discount": data.get("porcentage_discount"), 
                     "type_ship_full": int(data.get("type_ship")),
                     "ship_free": data.get("ship_free"),
