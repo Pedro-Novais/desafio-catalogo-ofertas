@@ -48,11 +48,40 @@ header p{
 
 main{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 25vh;
     margin-bottom: 10vh;
+}
+
+.containerFilters{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 5em;
+    margin-bottom: 2.5rem;
+}
+
+.filterStyle{
+    width: 50%;
+    padding: 1em;
+}
+
+.filterStyle select{
+    border-radius: 1em;
+    width: 100%;
+    border-style: none;
+    border-color: var(--border-color);
+    height: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.filterStyle select:hover{
+    cursor: pointer;
 }
 
 .containerProduct {
@@ -180,6 +209,14 @@ main{
 @media (max-width: 1000px){
     header{
         font-size: .8rem;
+    }
+
+    .containerFilters{
+        padding: 0;
+    }
+    
+    .filterStyle{
+        width: 100%;
     }
 
     .containerProduct {

@@ -7,7 +7,11 @@ from sqlite3 import Connection
 from django.http import JsonResponse
 from django.views import View
 
-from .utils import formate_value
+from .utils import (
+    formate_value,
+    get_price_float,
+    get_porcentage_discount
+)
 
 class ProductApi(View):
     def get(self, request) -> JsonResponse:
@@ -45,6 +49,8 @@ class ProductApi(View):
             
                 price_full_formated = formate_value(value=data.get("price_full"))
                 price_with_discount_formated = formate_value(value=data.get("price_final"))
+                porcentage_formated = get_porcentage_discount(data.get("porcentage_discount"))
+                price_float = get_price_float(data.get('price_full'))
 
                 list_products.append({
                     "image": data.get("image"), 
@@ -56,6 +62,8 @@ class ProductApi(View):
                     "porcentage_discount": data.get("porcentage_discount"), 
                     "type_ship_full": int(data.get("type_ship")),
                     "ship_free": data.get("ship_free"),
+                    "price": price_float,
+                    "porcentage": porcentage_formated
                 })
 
             cursor.fetchall()

@@ -1,30 +1,24 @@
 class InsertItens {
     URL = "http://127.0.0.1:8000/api/products"
 
-    constructor() {
-        this.get_products()
-    }
-
     async get_products() {
+
         const response = await fetch(this.URL);
         const data = await response.json();
 
         if (!data || data.length == 0) {
             return this.no_items_find()
         }
-
-        console.log(data)
         this.builder_list(data)
+
+        new ListenEvents(data)
     }
 
     builder_list(products) {
         const container = document.querySelector('.containerProduct')
-
         for (let i = 0; i < products.length; i++) {
             this.builder_product(container, products[i])
         }
-
-
     }
 
     builder_product(container, item) {
@@ -49,7 +43,7 @@ class InsertItens {
         this.builder_product_type_ship(card_info, item.type_ship_full)
         this.builder_product_ship_free(card_info, item.ship_free)
         this.builder_product_button(card_info, item.link)
-        
+
         card.appendChild(card_info)
         container.appendChild(card)
     }
@@ -177,9 +171,18 @@ class InsertItens {
 
             const container = this.create_element('div', container_attributes)
 
+            const span_attributes = [
+                {
+                    type: 'id',
+                    value: 'full'
+                }
+            ]
+
+            const span = this.create_element('span', span_attributes)
+
             const msg = "Enviado pelo Full"
 
-            const span = this.create_element_default('span', msg)
+            span.innerHTML = msg
 
             container.appendChild(span)
 
@@ -200,7 +203,16 @@ class InsertItens {
 
             const msg = "Entrega grátis"
 
-            const span = this.create_element_default('span', msg)
+            const span_attributes = [
+                {
+                    type: 'id',
+                    value: 'free'
+                }
+            ]
+
+            const span = this.create_element('span', span_attributes)
+
+            span.innerHTML = msg
 
             container.appendChild(span)
 
@@ -287,4 +299,84 @@ class InsertItens {
     }
 }
 
-new InsertItens()
+class ListenEvents {
+    constructor(product_json = null) {
+        const products = document.querySelectorAll('.productCard')
+
+        const filter_select = document.querySelector('#filter')
+
+        filter_select.addEventListener('change', (event) => {
+            this.reset_filter(products)
+            this.filter_items(products, event.target.value, product_json)
+        })
+    }
+
+    filter_items(products, type, product_json) {
+        if (type == "all") {
+            products.forEach(element => {
+                element.style.display = 'unset'
+            });
+        }
+        else if (type == "ship_free") {
+            products.forEach(element => {
+                const ship_free = element.querySelector('#free')
+
+                if (!ship_free) {
+                    element.style.display = 'none'
+                }
+            });
+        }
+        else if (type == "ship_full") {
+            products.forEach(element => {
+                const ship_full = element.querySelector('#full')
+
+                if (!ship_full) {
+                    element.style.display = 'none'
+                }
+            });
+        }
+        else if (type == "max_prices") {
+            const new_product_max = product_json.sort((a, b) => b.price - a.price);
+
+            if (new_product_max) {
+                this.clean_products()
+                new InsertItens().builder_list(new_product_max)
+                new ListenEvents()
+            }
+        }
+        else if (type == "min_prices") {
+            const new_product_min = product_json.sort((a, b) => a.price - b.price);
+
+            if (new_product_min) {
+                this.clean_products()
+                new InsertItens().builder_list(new_product_min)
+                new ListenEvents()
+            }
+        }
+        else if (type == "max_discount") {
+            const new_discount_max = product_json.sort((a, b) => b.porcentage - a.porcentage);
+
+            if (new_discount_max) {
+                this.clean_products()
+                new InsertItens().builder_list(new_discount_max)
+                new ListenEvents()
+            }
+        }
+    }
+
+    reset_filter(products) {
+        products.forEach(element => {
+            element.style.display = 'unset'
+        });
+    }
+
+    clean_products() {
+        const products = document.querySelectorAll('.productCard')
+
+        products.forEach(element => {
+            element.remove()
+        })
+    }
+}
+
+new InsertItens().get_products()
