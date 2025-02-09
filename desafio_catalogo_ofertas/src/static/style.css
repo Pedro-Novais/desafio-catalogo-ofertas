@@ -35,10 +35,11 @@ header{
     background-color: var(--header-color);
     padding: 0.5em;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
 }
 
 header p{
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 300;
     color: white;
     text-transform: uppercase;
@@ -74,8 +75,8 @@ main{
 
 .productCard{
     width: 90%;
-    height: 100vh;
-    max-height: 100vh;
+    height: 100vh; 
+    max-height: 100vh; 
     padding: 1em;
     border-radius: 1em;
     background-color: white;
@@ -84,11 +85,15 @@ main{
 }
 
 .containerImage{
-    width: 90%;
+    width: 100%;
+    max-height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .containerImage img{
-    width: 100%;
+    width: 250px;
 }
 
 .containerTitle p{
@@ -146,7 +151,7 @@ main{
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    width: 60%;
+    width: 80%;
     height: 3rem;
     border-radius: .5em;
     border-style: none;
@@ -164,4 +169,27 @@ main{
 
 .line{
     margin-bottom: .8em;
+}
+
+@media (max-width: 1000px){
+    header{
+        font-size: .8rem;
+    }
+
+    .containerProduct {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px){
+    .containerProduct {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .productCard{
+        height: unset;
+        max-height: unset;
+    }
+    .containerInfo{
+        height: 70%;
+    }
 }
