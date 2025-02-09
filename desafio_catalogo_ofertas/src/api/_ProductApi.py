@@ -14,7 +14,6 @@ class ProductApi(View):
             dir_database = os.path.join(dir_script, '..', '..', 'database', 'data.db')
 
             conn = sqlite3.connect(dir_database)
-            print(conn)
             products = self.get_products(conn)
             
             return JsonResponse(products, safe=False)
@@ -46,12 +45,12 @@ class ProductApi(View):
                     "image": data.get("image"), 
                     "name": data.get("name"),
                     "price_full": data.get("price_full"),
-                    "installments": data.get("installments"), 
+                    "instalments": data.get("installments"), 
                     "link": data.get("link"),
                     "price_with_discount": data.get("price_final"),
-                    "porcentage_discount": data.get("porcentage_disocunt"), 
-                    "type_ship_full": data.get("type_ship"),
-                    "ship_free": data.get("ship_free")
+                    "porcentage_discount": data.get("porcentage_discount"), 
+                    "type_ship_full": int(data.get("type_ship")),
+                    "ship_free": data.get("ship_free"),
                 })
 
             cursor.fetchall()
