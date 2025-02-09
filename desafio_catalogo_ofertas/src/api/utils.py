@@ -1,6 +1,6 @@
 from typing import Literal
 
-def formate_value(value: str | None) -> float | Literal[None]:
+def format_value(value: str | None) -> float | Literal[None]:
     if not value:
         return None
     

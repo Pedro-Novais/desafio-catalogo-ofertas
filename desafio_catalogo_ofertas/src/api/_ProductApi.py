@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.views import View
 
 from .utils import (
-    formate_value,
+    format_value,
     get_price_float,
     get_porcentage_discount
 )
@@ -47,8 +47,8 @@ class ProductApi(View):
             for product in products:
                 data = dict(zip(column_names, product))  
             
-                price_full_formated = formate_value(value=data.get("price_full"))
-                price_with_discount_formated = formate_value(value=data.get("price_final"))
+                price_full_formated = format_value(value=data.get("price_full"))
+                price_with_discount_formated = format_value(value=data.get("price_final"))
                 porcentage_formated = get_porcentage_discount(data.get("porcentage_discount"))
                 price_float = get_price_float(data.get('price_full'))
 
@@ -72,5 +72,4 @@ class ProductApi(View):
             return list_products
         
         except Exception as e:
-            print("Erro ao resgatar dados do banco")
-            print(e)
+            print("Erro ao resgatar dados do banco: {}".format(e))

@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo De Ofertas</title>
 
-    <!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +20,6 @@
 <body>
     <header>
         <p>Catalogo De Ofertas</p>
-        <input type="text" id="search" placeholder="Buscar..." onkeyup="filterItems()">
     </header>
     <main>
         <div class="containerFilters">
@@ -30,7 +28,7 @@
                 <select id="filter">
                     <option value="all">Todos</option>
                     <option value="ship_free">Produtos com frete grátis</option>
-                    <option value="ship_full">Produtos entregues pelo Full</option>
+                    <option value="ship_full">Produtos com entrega Full</option>
                     <option value="max_prices">Maiores preços (Sem considerar descontos) </option>
                     <option value="min_prices">Menores preços (Sem considerar descontos)</option>
                     <option value="max_discount">Maior desconto percentual</option>
@@ -38,81 +36,12 @@
             </div>
         </div>
         <div class="containerProduct">
-            <div class="productCard">
-                <div class="containerImage">
-                    <img src="" alt="image">
-                </div>
-                <div class="containerInfo">
-                    <div class="line containerTitle">
-                        <p>Pc Gamer Completo I7 3.4ghz 16gb Ssd 1tb 500w Gtx1650 4gb</p>
-                    </div>
-    
-                    <div class="line containerPriceFull">
-                        <span>R$100,00</span>
-                    </div>
-    
-                    <div class="line containerPriceFinal">
-                        <p>R$ 98,52</p>
-                        <span>15% OFF</span>
-                    </div>
-    
-                    <div class="line containerQuantitysIntalments">
-                        <p>em 10x R$ 280,81 sem juros</p>
-                    </div>
-    
-                    <div class="line containerTypeShip">
-                        <span id="full">Enviado pelo Full</span>
-                    </div>
-    
-                    <!-- <div class="line containerShipFree">
-                        <span id="free">Entrega grátis</span>
-                    </div> -->
-                    <div class="line containerButtonProduct">
-                        <a href="https://music.youtube.com/">Acessar Produto</a>
-                    </div>
-                </div>
-            </div>
-            <div class="productCard">
-                <div class="containerImage">
-                    <img src="https://http2.mlstatic.com/D_NQ_NP_773120-MLB73489476136_122023-O.webp" alt="image">
-                </div>
-                <div class="containerInfo">
-                    <div class="line containerTitle">
-                        <p>Pc Gamer Completo I7 3.4ghz 16gb Ssd 1tb 500w Gtx1650 4gb</p>
-                    </div>
-    
-                    <div class="line containerPriceFull">
-                        <span>R$100,00</span>
-                    </div>
-    
-                    <div class="line containerPriceFinal">
-                        <p>R$ 98,52</p>
-                        <span>15% OFF</span>
-                    </div>
-    
-                    <div class="line containerQuantitysIntalments">
-                        <p>em 10x R$ 280,81 sem juros</p>
-                    </div>
-    
-                    <!-- <div class="line containerTypeShip">
-                        <span id="full">Enviado pelo Full</span>
-                    </div> -->
-    
-                    <div class="line containerShipFree">
-                        <span id="free">Entrega grátis</span>
-                    </div>
-                    <div class="line containerButtonProduct">
-                        <a href="https://music.youtube.com/">Acessar Produto</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
     <footer>
         <div></div>
     </footer>
     <script src="{% static 'index.js' %}" defer></script>
-    <!-- <script src="../static/index.js" defer></script> -->
 </body>
 
 </html>
