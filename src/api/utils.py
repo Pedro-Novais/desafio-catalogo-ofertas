@@ -13,7 +13,6 @@ def get_porcentage_discount(porcentage):
              return int(porcentage[0])
         
         new_porcentage = "{}{}".format(porcentage[0], porcentage[1])
-        print(new_porcentage)
         try:
             porcenatge_formated = int(new_porcentage)
             return porcenatge_formated

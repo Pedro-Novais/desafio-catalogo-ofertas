@@ -180,7 +180,7 @@ class InsertItens {
 
             const span = this.create_element('span', span_attributes)
 
-            const msg = "Enviado pelo Full"
+            const msg = "Entrega Full"
 
             span.innerHTML = msg
 

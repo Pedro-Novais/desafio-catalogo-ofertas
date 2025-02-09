@@ -52,7 +52,7 @@ main{
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 25vh;
+    margin-top: 20vh;
     margin-bottom: 10vh;
 }
 
@@ -88,7 +88,7 @@ main{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    place-items: center;
+    place-items:normal;
     max-width: 1200px;
     height: 100%;
 }
@@ -104,8 +104,6 @@ main{
 
 .productCard{
     width: 90%;
-    height: 100vh; 
-    max-height: 100vh; 
     padding: 1em;
     border-radius: 1em;
     background-color: white;
@@ -221,6 +219,7 @@ main{
 
     .containerProduct {
         grid-template-columns: repeat(2, 1fr);
+        place-items: center;
     }
 }
 

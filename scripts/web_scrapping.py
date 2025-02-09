@@ -124,7 +124,7 @@ def get_driver():
         pass
 
     print("Falha ao inicializar o WebDriver.")
-    return None
+    raise Exception("Impossibilidade de inicializar Web Driver")
 
 def get_datas(
         products: list[WebElement]
